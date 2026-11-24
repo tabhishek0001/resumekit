@@ -72,6 +72,7 @@ $$('[data-field]').forEach(el=>el.addEventListener('input',()=>{data[el.dataset.
 document.addEventListener('input',e=>{if(e.target.matches('[data-repeat]')){collectRepeat(e.target);buildPreview()}});
 document.addEventListener('click',e=>{const add=e.target.closest('[data-add]');if(add)addItem(add.dataset.add);const remove=e.target.closest('[data-remove]');if(remove){data[remove.dataset.remove].splice(Number(remove.dataset.index),1);renderRepeat(remove.dataset.remove);buildPreview()}});
 $('#saveBtn').addEventListener('click',save);
+$('#backupBtn').addEventListener('click',downloadJson);
 $('#downloadBtn').addEventListener('click',()=>{readFields();buildPreview();window.print()});
 $('#newBtn').addEventListener('click',()=>{if(!confirm('Start a new resume? Export or save your current work first.'))return;data=emptyData();writeFields();['experience','education','projects'].forEach(renderRepeat);$('#jobDescription').value='';$('#matchResults').innerHTML='';buildPreview()});
 $('#clearBtn').addEventListener('click',()=>{if(!confirm('Clear all resume information from this editor and its saved browser draft?'))return;data=emptyData();localStorage.removeItem(STORAGE_KEY);writeFields();['experience','education','projects'].forEach(renderRepeat);buildPreview();notify('Resume data cleared.','success')});
